@@ -46,7 +46,7 @@ class ConditionTest {
     @Test
     public void shouldGetAndSetMaxTemperature() {
         Condition condition = new Condition();
-        int expected = 30;
+        int expected = 40;
         condition.setMaxTemperature(expected);
         assertEquals(expected, condition.getMaxTemperature());
     }
@@ -67,7 +67,6 @@ class ConditionTest {
     public void shouldDecreaseCurrentTemperature() {
         Condition condition = new Condition();
         condition.setOn(true);
-
         condition.setMaxTemperature(40);
         condition.setMinTemperature(10);
         condition.setCurrentTemperature(20);
@@ -80,10 +79,9 @@ class ConditionTest {
     public void shouldCheckMaxTemperature() {
         Condition condition = new Condition();
         condition.setOn(true);
-        condition.setMaxTemperature(20);
+        condition.setMaxTemperature(40);
         condition.setCurrentTemperature(20);
-
-        int expected = 20;
+        int expected = 21;
         condition.increaseCurrentTemperature();;
         assertEquals(expected, condition.getCurrentTemperature());
     }
@@ -92,11 +90,9 @@ class ConditionTest {
     public void shouldCheckMinTemperature() {
         Condition condition = new Condition();
         condition.setOn(true);
-        //установить max темпертуру
         condition.setMinTemperature(10);
-        condition.setMaxTemperature(30);
+        condition.setMaxTemperature(40);
         condition.setCurrentTemperature(10);
-
         int expected = 10;
         condition.decreaseCurrentTemperature();
         assertEquals(expected, condition.getCurrentTemperature());
