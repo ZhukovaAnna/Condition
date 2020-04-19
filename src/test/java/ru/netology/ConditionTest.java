@@ -2,6 +2,8 @@ package ru.netology;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.concurrent.Callable;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ConditionTest {
@@ -93,7 +95,7 @@ class ConditionTest {
         condition.setOn(true);
         condition.setMinTemperature(10);
         condition.setMaxTemperature(40);
-        condition.setCurrentTemperature(10);
+        condition.setCurrentTemperature(11);
         int expected = 10;
         condition.decreaseCurrentTemperature();
         assertEquals(expected, condition.getCurrentTemperature());
@@ -102,9 +104,10 @@ class ConditionTest {
     @Test
     public void shouldNotDecreaseCurrentTemperature() {
         Condition condition = new Condition();
+        condition.setOn(true);
         condition.setMaxTemperature(40);
         condition.setMinTemperature(10);
-        condition.setCurrentTemperature(10);
+        condition.setCurrentTemperature(11);
         condition.decreaseCurrentTemperature();
         assertEquals(10, condition.getCurrentTemperature());
     }
@@ -141,4 +144,41 @@ class ConditionTest {
         condition.decreaseCurrentTemperature();
         assertEquals(expected, condition.getCurrentTemperature());
     }
+
+    @Test
+    public void shouldStayOnMaxTemp() {
+        Condition condition = new Condition();
+        condition.setOn(true);
+        condition.setMaxTemperature(40);
+        condition.setMinTemperature(10);
+        int expected = 20;
+        condition.setCurrentTemperature(expected);
+        condition.setCurrentTemperature(condition.getMaxTemperature()+1);
+        assertEquals(expected,condition.getCurrentTemperature());
+
+    }
+
+    @Test
+    public void shouldStayOnMinTemp() {
+        Condition condition = new Condition();
+        condition.setOn(true);
+        condition.setMaxTemperature(40);
+        condition.setMinTemperature(10);
+        int expected = 20;
+        condition.setCurrentTemperature(expected);
+        condition.setCurrentTemperature(condition.getMinTemperature()-1);
+        assertEquals(expected,condition.getCurrentTemperature());
+    }
+
+    @Test
+    public void shouldBeOn()
+    {
+        Condition condition = new Condition();
+        condition.setMaxTemperature(40);
+        condition.setMinTemperature(10);
+        int expected = 20;
+        condition.setCurrentTemperature(expected);
+        condition.decreaseCurrentTemperature();assertEquals(expected,condition.getCurrentTemperature());
+    }
+
 }

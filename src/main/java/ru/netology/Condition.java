@@ -58,7 +58,7 @@ public class Condition {
     public void increaseCurrentTemperature() {
         if (!this.isOn()){
             return;}
-        if (currentTemperature +1>= maxTemperature){
+        if (currentTemperature +1> maxTemperature){
             return;}
         currentTemperature++;
     }
@@ -66,7 +66,7 @@ public class Condition {
     public void decreaseCurrentTemperature() {
         if (!this.isOn()){
             return;}
-        if (currentTemperature - 1 <= minTemperature){
+        if (currentTemperature - 1 < minTemperature){
             return;}
         currentTemperature--;
     }
