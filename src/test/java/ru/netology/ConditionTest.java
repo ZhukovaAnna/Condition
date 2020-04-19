@@ -82,7 +82,8 @@ class ConditionTest {
         condition.setMaxTemperature(40);
         condition.setCurrentTemperature(20);
         int expected = 21;
-        condition.increaseCurrentTemperature();;
+        condition.increaseCurrentTemperature();
+        ;
         assertEquals(expected, condition.getCurrentTemperature());
     }
 
@@ -94,6 +95,49 @@ class ConditionTest {
         condition.setMaxTemperature(40);
         condition.setCurrentTemperature(10);
         int expected = 10;
+        condition.decreaseCurrentTemperature();
+        assertEquals(expected, condition.getCurrentTemperature());
+    }
+
+    @Test
+    public void shouldNotDecreaseCurrentTemperature() {
+        Condition condition = new Condition();
+        condition.setMaxTemperature(40);
+        condition.setMinTemperature(10);
+        condition.setCurrentTemperature(10);
+        condition.decreaseCurrentTemperature();
+        assertEquals(10, condition.getCurrentTemperature());
+    }
+
+    @Test
+    public void shouldNotMaxTemperature() {
+        Condition condition = new Condition();
+        condition.setOn(true);
+        int expected = 40;
+        condition.setMaxTemperature(expected);
+        condition.setCurrentTemperature(expected);
+        condition.increaseCurrentTemperature();
+        assertEquals(expected, condition.getCurrentTemperature());
+    }
+
+    @Test
+    public void shouldNotIncreaseCurrentTemperature() {
+        Condition condition = new Condition();
+        condition.setMaxTemperature(40);
+        condition.setMinTemperature(10);
+        condition.setCurrentTemperature(10);
+        condition.increaseCurrentTemperature();
+        assertEquals(10, condition.getCurrentTemperature());
+    }
+
+    @Test
+    public void shouldNotMinTemperature() {
+        Condition condition = new Condition();
+        condition.setOn(true);
+        int expected = 10;
+        condition.setMaxTemperature(40);
+        condition.setMinTemperature(expected);
+        condition.setCurrentTemperature(expected);
         condition.decreaseCurrentTemperature();
         assertEquals(expected, condition.getCurrentTemperature());
     }
